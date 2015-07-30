@@ -68,7 +68,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Heroes</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="<?php echo $templateDirectoryUri ?>/assets/css/main.css">
   </head>
@@ -208,6 +208,7 @@
             $imgSrc = get_field('heroImage');
             $audioUrl = get_field('heroUrl');
             $episodeDate = get_field('episodeDate');
+            $episodeDate = $episodeDate ? $episodeDate : $heroesEpisodesArray[$i]['date'];
             $itemClass= 'open';
             $post_title = $post->post_title;
             if(!$post){
