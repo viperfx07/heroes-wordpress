@@ -1,6 +1,64 @@
 <?php
   $templateDirectoryUri = get_template_directory_uri();
   $posts = get_posts();
+  $heroesEpisodesArray = array(
+    array(
+        'name' => 'Noah',
+        'date' => '26 July 2015'
+    ), 
+    array(
+        'name' => 'Abraham',
+        'date' => '2 August 2015'
+    ), 
+    array(
+        'name' => 'David',
+        'date' => '9 August 2015'
+    ), 
+    array(
+        'name' => 'Esther',
+        'date' => '16 August 2015'
+    ), 
+    array(
+        'name' => 'Joseph',
+        'date' => '13 September 2015'
+    ), 
+    array(
+        'name' => 'Joshua',
+        'date' => '20 September 2015'
+    ), 
+    array(
+        'name' => 'Elijah',
+        'date' => '4 October 2015'
+    ), 
+    array(
+        'name' => 'Moses',
+        'date' => '11 October 2015'
+    ), 
+    array(
+        'name' => 'Daniel',
+        'date' => '18 October 2015'
+    ), 
+    array(
+        'name' => 'Job',
+        'date' => '1 November 2015'
+    ), 
+    array(
+        'name' => 'Ruth',
+        'date' => '22 November 2015'
+    ), 
+    array(
+        'name' => 'Jonah',
+        'date' => '29 November 2015'
+    ), 
+    array(
+        'name' => 'Gideon',
+        'date' => '13 December 2015'
+    ), 
+    array(
+        'name' => 'Jesus',
+        'date' => '20 December 2015'
+    )
+  );
 ?>
 
 <!DOCTYPE html>
@@ -143,24 +201,32 @@
       <div class="row">
         <div class="col-xs-12"><img src="<?php echo $templateDirectoryUri ?>/assets/img/heroes-title.png" alt="Heroes" class="logo"></div>
       </div>
-      <div class="row">
-        <?php          
+      <div class="row heroes-container">
+        <?php
           for($i=0; $i<14; $i++) : 
             $post = $posts[$i];  
             $imgSrc = get_field('heroImage');
             $audioUrl = get_field('heroUrl');
+            $episodeDate = get_field('episodeDate');
             $itemClass= 'open';
+            $post_title = $post->post_title;
             if(!$post){
               $imgSrc = $templateDirectoryUri . '/assets/img/hero-placeholder-contentonly.jpg';
               $itemClass = '';
+              $post_title = 'Coming soon';
+              $episodeDate = $heroesEpisodesArray[$i]['date'];
             }
           ?>
-          <div class="col-xs-12 col-sm-4 col-lg-1">
+          <div class="col-xs-12 col-sm-4 col-lg-1 item--container <?php echo $itemClass?>">
             <?php if($audioUrl) : ?><a href="<?php echo $audioUrl ?>"><?php endif; ?>
               <div class="item <?php echo $itemClass ?>">
-                <div class="item--header"></div>
                 <div class="item--content">
                   <img src="<?php echo $imgSrc ?>" class="img-responsive">
+                  <div class="item--content--overlay">
+                    <div class="episode--number">Ep.<span><?php echo $i+1 ?></span></div>
+                    <div class="episode--title"><?php echo $post_title ?></div>
+                    <div class="episode--date"><?php echo date('d M Y', strtotime($episodeDate)) ?></div>
+                  </div>
                 </div>
               </div>
             <?php if($audioUrl) : ?></a><?php endif; ?>
